@@ -16,12 +16,12 @@
             <li class="nav-item">
                <a href="{{ url('seed') }}" class="nav-link btn btn-sm btn-success mx-2 text-light">Add seeder</a>
             </li>           
-            <li class="nav-item pl-2" style="margin-top: -6.5px; display: none;">
+            <li class="nav-item pl-2" style="margin-top: -6.5px; display: ;">
                
-              {{--  <small class="title">Refresh Status</small>         
+               <small class="title">Refresh Status</small>         
                @php
                   $status = DB::table('refresh_status')->first();
-               @endphp --}}
+               @endphp
                
                <!-- 1st style -->
               {{--  <a style="line-height: 18px; display: block;" href="{{ url('refreshStatus', 'status') }}"
@@ -29,11 +29,11 @@
                </a>  --}}
 
                <!-- 2nd style -->
-              {{--  <div style="display: flex;" class="btn-group">
+               <div style="display: flex;" class="btn-group">
                   <a class="p-0 btn btn-sm btn-danger" href="{{ url('refreshStatus', 'decrease') }}" title="Click for {{($status->status==true) ? 'decrease[-]':''}}" {{($status->status==true) ? '':'hidden'}} {{($status->time==0) ? 'hidden':''}} {{$status->time}}>−</a>
                   <a class="p-0 btn btn-sm {{($status->status==true) ? 'btn-secondary':'btn-danger'}}" href="{{ url('refreshStatus', 'status') }}" title="Click for {{($status->status==true) ? 'Off':'On'}}" style="line-height: {{($status->status==true) ? 'normal':'18px'}};">{{($status->status==true) ? 'On ['.$status->time.'”]':'Off'}}</a>
                   <a class="p-0 btn btn-sm btn-success" href="{{ url('refreshStatus', 'increase') }}" title="Click for {{($status->status==true) ? 'increase[+]':''}}" {{($status->status==true) ? '':'hidden'}}>+</a>
-               </div> --}}
+               </div>
             </li>           
          </ul>
 

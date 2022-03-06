@@ -7,10 +7,10 @@
    <title>{{ config('app.name', 'Title') }}</title>
    <link rel="icon" href="{{ asset('#') }}" type="image/icon type">
 
-  {{--  @php 
+   @php 
       $time = DB::table('refresh_status')->where('status', true)->first();
    @endphp               
-   <meta http-equiv="refresh" content="{{ ($time==true)? $time->time:''}}"> --}}
+   <meta http-equiv="refresh" content="{{ ($time==true)? $time->time:''}}">
 
    <!-- Fonts -->
    <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,3 +20,5 @@
    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
    <link rel="stylesheet" href="{{ asset('css/dataTables.min.css') }}">
    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+   @yield('css')
+

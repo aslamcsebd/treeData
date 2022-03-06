@@ -3,11 +3,12 @@
    <a class="text-light" href="https://www.aslambd.com"> All rights reserved</a>
 </footer>   
 
+
 <!-- jQuery -->
    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
    <script src="{{ asset('js/dataTables.min.js') }}"></script>
-
+   @yield('js')
 
 {{-- script --}}
    {{-- Navbar Fixed --}}
@@ -41,6 +42,6 @@
          } );
          
          $('.table').DataTable({
-            "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+            // "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
          });
       </script>
