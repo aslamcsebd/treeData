@@ -76,8 +76,8 @@ class TreeController extends Controller {
    public function itrerate(Request $request){
       $childTitle = $request->route()->uri;
       $country = Tree_data::where('parent_id', $request->parent_id)->select('id', 'data_name')->get();
-      // $totalChild = $country->count();
-      return response()->json([$childTitle => $country]);
+      $totalChild = $country->count();
+      return response()->json([$childTitle => $country, 'totalChild'=> $totalChild]);
    }
 
 }
