@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 20, 2022 at 12:45 PM
+-- Generation Time: Apr 11, 2022 at 04:38 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -48,17 +48,6 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2022_02_20_060647_create_tree_titles_table', 2),
-(7, '2022_02_20_060706_create_tree_datas_table', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -78,9 +67,9 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `refresh_status` (
-  `id` int(11) NOT NULL,
-  `time` int(5) NOT NULL DEFAULT '5' COMMENT 'Second',
-  `status` varchar(5) NOT NULL
+  `id` bigint(20) NOT NULL,
+  `time` bigint(20) NOT NULL DEFAULT '5' COMMENT 'Second',
+  `status` tinyint(4) NOT NULL COMMENT '0=hide, 1=show'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -88,7 +77,7 @@ CREATE TABLE `refresh_status` (
 --
 
 INSERT INTO `refresh_status` (`id`, `time`, `status`) VALUES
-(1, 1, '0');
+(1, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -106,6 +95,23 @@ CREATE TABLE `tree_datas` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tree_datas`
+--
+
+INSERT INTO `tree_datas` (`id`, `user_id`, `parent_id`, `data_name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, NULL, 'Bangladesh', 1, '2022-03-02 06:46:13', NULL, NULL),
+(2, 1, NULL, 'India', 1, '2022-03-02 06:46:20', NULL, NULL),
+(3, 1, 1, 'Chittagong', 1, NULL, NULL, NULL),
+(4, 1, 1, 'Dhaka', 1, NULL, NULL, NULL),
+(5, 1, 1, 'Sylhet', 1, NULL, NULL, NULL),
+(9, 1, 3, 'Halishar', 1, NULL, NULL, NULL),
+(10, 1, 3, 'New market', 1, NULL, NULL, NULL),
+(11, 1, 3, 'Agrabad', 1, NULL, NULL, NULL),
+(12, 1, 11, 'Mogoltoli', 1, NULL, NULL, NULL),
+(13, 1, 11, 'Mather bari', 1, NULL, NULL, NULL),
+(14, 1, 11, 'Commerce college road', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -128,7 +134,10 @@ CREATE TABLE `tree_titles` (
 --
 
 INSERT INTO `tree_titles` (`id`, `user_id`, `title_name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'Parents', 1, NULL, NULL, NULL);
+(1, 1, 'country', 1, '2022-03-02 06:42:07', '2022-04-06 06:16:09', NULL),
+(2, 1, 'district', 1, '2022-03-02 06:42:07', '2022-04-06 06:16:03', NULL),
+(3, 1, 'city', 1, '2022-03-02 06:42:07', '2022-04-06 10:24:48', NULL),
+(26, 1, 'area', 1, '2022-04-11 04:36:55', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -152,7 +161,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Aslam', 'aslam@gmail.com', NULL, '$2y$10$MZASQQG7Z8E3T2127B0L9uY3bxr9KRbbpwnzVIDO3W1qVDfSmMuoa', NULL, '2022-02-20 00:04:04', '2022-02-20 00:04:04');
+(1, 'Aslam', 'aslamcsebd@gmail.com', NULL, '$2y$10$gk.oPmp3GDgDxCvISaaW6uigAQHkt41m43n2FqE.eOWee4RoVhwnC', NULL, '2022-03-02 06:22:41', '2022-03-02 06:22:41'),
+(2, 'aslam2', 'aslam2@gmail.com', NULL, '$2y$10$OPqYTd4fcnQIqVDp/VF7luq20sNjHF8tFZ3fvHFPu/2JBZnV.BXNK', NULL, '2022-04-10 05:56:19', '2022-04-10 05:56:19');
 
 --
 -- Indexes for dumped tables
@@ -215,31 +225,31 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `refresh_status`
 --
 ALTER TABLE `refresh_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tree_datas`
 --
 ALTER TABLE `tree_datas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tree_titles`
 --
 ALTER TABLE `tree_titles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

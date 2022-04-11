@@ -45,3 +45,27 @@
             // "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
          });
       </script>
+
+
+ <script type="text/javascript">
+         window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+               $(this).remove(); 
+            });
+         }, 5000);
+      </script>
+
+
+<style type="text/css">
+   .alert { 
+      margin-top: 0px; 
+      position: absolute; 
+      right: 0px; 
+      z-index: 1; 
+      color: white;
+   }
+   .close { color: #000 !important; margin: 0 -8px 0px 10px; line-height: 20px; }
+   ul li { list-style: none; margin-top: 20px; }
+   .close:hover { color: black; }
+</style>
+
