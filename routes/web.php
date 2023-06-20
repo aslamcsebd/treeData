@@ -13,6 +13,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function (){
 
    Route::get('/home', 'TreeController@index')->name('home');
+   // Route::get('/home', 'TreeController@index2')->name('home');
 
    // Page refresh status
    Route::get('/refreshStatus/{value}', 'HomeController@refreshStatus')->name('refreshStatus');

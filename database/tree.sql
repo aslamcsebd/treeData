@@ -101,8 +101,8 @@ CREATE TABLE `tree_datas` (
 --
 
 INSERT INTO `tree_datas` (`id`, `user_id`, `parent_id`, `data_name`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, NULL, 'Bangladesh', 1, '2022-03-02 06:46:13', NULL, NULL),
-(2, 1, NULL, 'India', 1, '2022-03-02 06:46:20', NULL, NULL),
+(1, 1, 0, 'Bangladesh', 1, '2022-03-02 06:46:13', NULL, NULL),
+(2, 1, 0, 'India', 1, '2022-03-02 06:46:20', NULL, NULL),
 (3, 1, 1, 'Chittagong', 1, NULL, NULL, NULL),
 (4, 1, 1, 'Dhaka', 1, NULL, NULL, NULL),
 (5, 1, 1, 'Sylhet', 1, NULL, NULL, NULL),

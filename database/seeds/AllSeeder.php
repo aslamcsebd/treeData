@@ -27,7 +27,7 @@ class AllSeeder extends Seeder{
       foreach (range(1, 10) as $value) {
          DB::table('tree_datas')->insert([
             'user_id' => $faker->numberBetween(1, 5),
-            'parent_id' => $faker->numberBetween(1, 10),            
+            'parent_id' => $faker->numberBetween(0, 10),            
             'data_name' => $faker->name,          
          ]);
       }

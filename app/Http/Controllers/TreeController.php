@@ -16,13 +16,40 @@ use App\Tree_data;
 class TreeController extends Controller {
 
    public function index(){
+      /*
+      recursive function
+      $data['parentList'] = Tree_data::where('user_id', Auth::id())->where('parent_id', 0)->with(['children'])->get();  
+      dd($parent);
+      */
+
       $data['tree_title'] = Tree_title::where('user_id', Auth::id())->get();
       $data['tree_data'] = Tree_data::where('user_id', Auth::id())->get();
-      $data['tree_data_parents'] = Tree_data::where('user_id', Auth::id())->where('parent_id', null)->get();
+      $data['tree_data_parents'] = Tree_data::where('user_id', Auth::id())->where('parent_id', 0)->get();
       return view('home', $data);
    }
 
-// title_name
+   //Manual [recursive function]
+   public function index2(){
+      $allData = Tree_data::where('user_id', Auth::id())->get();
+      $parent = $allData->where('parent_id', 0);
+
+      self::formateTree($parent, $allData);
+
+      // dd($parent);      
+      return view('nestedLoop', compact('parent'));
+   }
+
+   private static function formateTree($parent, $allData){
+      foreach($parent as $child) {
+            $child->name;
+            $child->children = $allData->where('parent_id', $child->id)->values();
+            if($child->children->count() > 0){
+               self::formateTree($child->children, $allData);
+            }
+      }
+   }
+
+   // title_name
    public function addTitle(Request $request){
 
       Validator::extend('unique_custom', function ($attribute, $value, $parameters){
@@ -50,7 +77,7 @@ class TreeController extends Controller {
       return back()->with('success','Title save successfully');
    }
 
-// addParent
+   // addParent
    public function addParent(Request $request){
       $validator = Validator::make($request->all(),[
          'parent'=>'required'
@@ -61,13 +88,14 @@ class TreeController extends Controller {
       }
       Tree_data::insert([
          'user_id'=> Auth::id(),
+         'parent_id'=> 0,
          'data_name'=>$request->parent,
          'created_at' => Carbon::now()
       ]);
       return back()->with('success','Parent data save successfully');
    }
 
-// addData
+   // addData
    public function addData(Request $request){
 
       $validator = Validator::make($request->all(),[
@@ -85,7 +113,7 @@ class TreeController extends Controller {
       return back()->with('success','Parent data save successfully');
    }
 
-// Delete
+   // Delete
    public function deleteTreeTitle($id){
       Tree_title::find($id)->delete();
       return back()->with('danger', 'Title delete successfully');
@@ -97,7 +125,7 @@ class TreeController extends Controller {
       return back()->with('danger', 'Tree data delete successfully');
    }
 
-// depency code
+   // depency code
    public function itrerate(Request $request){
 
       if($request->titleCount == $request->titleId){
@@ -124,5 +152,6 @@ class TreeController extends Controller {
    //    $totalChild = $country->count();
    //    return response()->json([$childTitle => $country, 'totalChild'=> $totalChild]);
    // }
-
 }
+
+
